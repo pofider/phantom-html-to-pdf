@@ -1,5 +1,5 @@
 #phantom-html-to-pdf
-[![Build Status](https://travis-ci.org/pofider/phantom-html-to-pdf.png?branch=master)](https://travis-ci.org/pofider/phantom-html-to-pdf)    
+[![Build Status](https://travis-ci.org/pofider/phantom-html-to-pdf.png?branch=master)](https://travis-ci.org/pofider/phantom-html-to-pdf)
 
 > **node.js phantom wrapper for converting html to pdf in scale**
 
@@ -17,11 +17,11 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 ```js
 var conversion = require("phantom-html-to-pdf")({
     /* number of allocated phantomjs processes */
-	numberOfWorkers: 2, 
+	numberOfWorkers: 2,
 	/* timeout in ms for html conversion, when the timeout is reached, the phantom process is recycled */
-	timeout: 5000, 
+	timeout: 5000,
 	/* directory where are stored temporary html and pdf files, use something like npm package reaper to clean this up */
-	tmpDir: "os/tmpdir" 
+	tmpDir: "os/tmpdir"
 });
 ```
 
@@ -30,13 +30,15 @@ var conversion = require("phantom-html-to-pdf")({
 ```js
 conversion({
 	html: "<h1>Hello world</h1>",
+	header: "<h2>foo</h2>",
+	footer: "<h2>foo</h2>",
 	url: "http://jsreport.net",//set direct url instead of html
 	printDelay: 0,//time in ms to wait before printing into pdf
-	allowLocalFilesAccess: false,//set to true to allow request starting with file:///	
+	allowLocalFilesAccess: false,//set to true to allow request starting with file:///
 	paperSize: {
-		format, orientation, margin, width, height, header, footer
+		format, orientation, margin, width, height, headerHeight, footerHeight
 	},
-	customHeaders: [],	
+	customHeaders: [],
 	settings: {
 		javascriptEnabled : true
 	},
