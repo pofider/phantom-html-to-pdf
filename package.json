@@ -1,0 +1,34 @@
+{
+  "name": "phantom-html-to-pdf",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jan Blaha",
+    "email": "jan.blaha@hotmail.com"
+  },
+  "contributors": [],
+  "description": "Convert html to pdf using phantomjs",
+  "keywords": [
+    "html",
+    "pdf",
+    "conversion",
+    "phantomjs"
+  ],
+  "homepage": "https://github.com/pofider/phantom-html-to-pdf",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:pofider/phantom-html-to-pdf.git"
+  },
+  "dependencies": {
+    "underscore": "1.8.2",
+    "phantom-workers": "*"
+  },
+  "devDependencies": {
+    "mocha": "2.1.0",
+    "should": "5.0.1"
+  },
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
+  "main": "index.js",
+  "licence": "MIT"
+}
