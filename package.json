@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "underscore": "1.8.2",
-    "phantom-workers": "*"
+    "phantom-workers": "*",
+    "uuid": "2.0.1"
   },
   "devDependencies": {
     "mocha": "2.1.0",
