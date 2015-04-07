@@ -31,5 +31,5 @@
     "test": "mocha test/test.js"
   },
   "main": "index.js",
-  "licence": "MIT"
+  "license": "MIT"
 }
