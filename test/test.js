@@ -3,7 +3,9 @@ var should = require("should"),
     fs = require("fs"),
     tmpDir = path.join(__dirname, "temp"),
     conversion = require("../lib/conversion.js")({
-        tmpDir: tmpDir
+        tmpDir: tmpDir,
+        portLeftBoundary: 10000,
+        portRightBoundary: 15000
     });
 
 describe("phantom html to pdf", function () {
@@ -34,8 +36,8 @@ describe("phantom html to pdf", function () {
     });
 
     rmDir = function (dirPath) {
-        if (!fs.exists(dirPath))
-            fs.mkdir(dirPath);
+        if (!fs.existsSync(dirPath))
+            fs.mkdirSync(dirPath);
 
         try {
             var files = fs.readdirSync(dirPath);
