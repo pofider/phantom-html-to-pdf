@@ -23,7 +23,12 @@ var conversion = require("phantom-html-to-pdf")({
 	/* timeout in ms for html conversion, when the timeout is reached, the phantom process is recycled */
 	timeout: 5000,
 	/* directory where are stored temporary html and pdf files, use something like npm package reaper to clean this up */
-	tmpDir: "os/tmpdir"
+	tmpDir: "os/tmpdir",
+	/* optional port range where to start phantomjs server */
+	portLeftBoundary: 1000,
+	portRightBoundary: 2000,
+	/* optional hostname where to start phantomjs server */
+	host: '127.0.0.1'
 });
 ```
 
