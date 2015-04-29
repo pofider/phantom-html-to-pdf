@@ -14,17 +14,6 @@ describe("phantom html to pdf", function () {
         rmDir(tmpDir);
     });
 
-    it("should create a pdf file", function (done) {
-        conversion("foo", function (err, res) {
-            if (err)
-                return done(err);
-
-            res.numberOfPages.should.be.eql(1);
-            res.stream.should.have.property("readable");
-            done();
-        });
-    });
-
     it("should set number of pages correctly", function (done) {
         conversion("<h1>aa</h1><div style='page-break-before: always;'></div><h1>bb</h1>", function (err, res) {
             console.log("Done");
@@ -32,6 +21,17 @@ describe("phantom html to pdf", function () {
                 return done(err);
 
             res.numberOfPages.should.be.eql(2);
+            done();
+        });
+    });
+
+    it("should create a pdf file", function (done) {
+        conversion("foo", function (err, res) {
+            if (err)
+                return done(err);
+
+            res.numberOfPages.should.be.eql(1);
+            res.stream.should.have.property("readable");
             done();
         });
     });
