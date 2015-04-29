@@ -16,7 +16,6 @@ describe("phantom html to pdf", function () {
 
     it("should set number of pages correctly", function (done) {
         conversion("<h1>aa</h1><div style='page-break-before: always;'></div><h1>bb</h1>", function (err, res) {
-            console.log("Done");
             if (err)
                 return done(err);
 
