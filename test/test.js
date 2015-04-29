@@ -27,6 +27,7 @@ describe("phantom html to pdf", function () {
 
     it("should set number of pages correctly", function (done) {
         conversion("<h1>aa</h1><div style='page-break-before: always;'></div><h1>bb</h1>", function (err, res) {
+            console.log("Done");
             if (err)
                 return done(err);
 
@@ -45,13 +46,16 @@ describe("phantom html to pdf", function () {
         catch (e) {
             return;
         }
-        if (files.length > 0)
+        if (files.length > 0) {
             for (var i = 0; i < files.length; i++) {
                 var filePath = dirPath + '/' + files[i];
-                if (fs.statSync(filePath).isFile())
-                    try {
+                try {
+                    if (fs.statSync(filePath).isFile())
                         fs.unlinkSync(filePath);
-                    }catch(e){};
+                } catch (e) {
+                }
+                ;
             }
+        }
     };
 });
