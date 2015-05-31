@@ -28,7 +28,11 @@ var conversion = require("phantom-html-to-pdf")({
 	portLeftBoundary: 1000,
 	portRightBoundary: 2000,
 	/* optional hostname where to start phantomjs server */
-	host: '127.0.0.1'
+	host: '127.0.0.1',
+	/* use rather dedicated process for every phantom printing 
+	  dedicated-process strategy is quite slower but can solve some bugs 
+	  with corporate proxy */	
+	strategy: "phantom-server | dedicated-process"
 });
 ```
 
