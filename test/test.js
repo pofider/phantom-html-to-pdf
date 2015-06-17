@@ -81,7 +81,6 @@ describe("phantom html to pdf", function () {
                         fs.unlinkSync(filePath);
                 } catch (e) {
                 }
-                ;
             }
         }
     };
