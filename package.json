@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "phantom-workers": "0.2.0",
-    "phantomjs": "^1.9.17",
+    "phantomjs": "1.9.17",
     "underscore": "1.8.2",
     "uuid": "2.0.1"
   },

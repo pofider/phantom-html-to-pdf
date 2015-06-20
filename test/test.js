@@ -22,7 +22,7 @@ describe("phantom html to pdf", function () {
 
         beforeEach(function() {
             rmDir(tmpDir);
-            conversion.strategy = strategy;
+            conversion.options.strategy = strategy;
         });
 
         it("should set number of pages correctly", function (done) {
