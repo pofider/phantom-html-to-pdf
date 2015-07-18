@@ -29,3 +29,6 @@ node_modules
 .lock-wscript
 
 test/temp/*.*
+
+lib/scripts/serverScript.js
+lib/scripts/standaloneScript.js

@@ -29,7 +29,8 @@
     "should": "5.0.1"
   },
   "scripts": {
-    "test": "mocha test/test.js"
+    "test": "node lib/prepareScripts.js && mocha test/test.js",
+    "postinstall": "node lib/prepareScripts.js"
   },
   "main": "index.js",
   "license": "MIT"
