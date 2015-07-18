@@ -63,5 +63,11 @@ conversion({
 }, cb);
 ```
 
+##Kill workers
+```js
+//kill all phantomjs workers when using phantom-server strategy
+conversion.kill();
+```
+
 ##License
 See [license](https://github.com/pofider/phantom-html-to-pdf/blob/master/LICENSE)
