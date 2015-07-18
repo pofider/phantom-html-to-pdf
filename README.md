@@ -56,6 +56,9 @@ conversion({
 	viewportSize: {
 		width: 600,
 		height: 600
+	},
+	format: {
+		quality: 100
 	}
 }, cb);
 ```
