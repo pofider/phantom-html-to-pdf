@@ -69,5 +69,12 @@ conversion({
 conversion.kill();
 ```
 
+##Page numbers
+Use directives `{#pageNum}` and `{#numPages}` inside header or footer to add current page number resp. total number of pages.
+
+##Further notes
+You may find some further information and usage examples in the [jsreport documentation](http://jsreport.net/learn/phantom-pdf) or try pdf printing in the [online playground](https://playground.jsreport.net/#/playground/xykdJcxR5).
+
+
 ##License
 See [license](https://github.com/pofider/phantom-html-to-pdf/blob/master/LICENSE)
