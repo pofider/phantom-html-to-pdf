@@ -48,9 +48,24 @@ describe("phantom html to pdf", function () {
             });
         });
 
-        it ('should create a pdf file ignoring ssl errors', function(done) {
+        it('should create a pdf file ignoring ssl errors', function(done) {
             conversion({
                 url: 'https://sygris.com'
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should wait for page js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>window.PHANTOM_HTML_TO_PDF_DONE();</script>',
+                waitForJS: true
             }, function(err, res) {
                 if (err) {
                     return done(err);
