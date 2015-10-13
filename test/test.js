@@ -64,8 +64,39 @@ describe("phantom html to pdf", function () {
 
         it('should wait for page js execution', function(done) {
             conversion({
-                html: '<h1>aa</h1><script>window.PHANTOM_HTML_TO_PDF_DONE();</script>',
+                html: '<h1>aa</h1><script>window.PHANTOM_HTML_TO_PDF_READY = true;</script>',
                 waitForJS: true
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should wait for page async js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>setTimeout(function() { window.PHANTOM_HTML_TO_PDF_READY = true; }, 200);</script>',
+                waitForJS: true
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should allow define a custom var name for page js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>window.ready = true;</script>',
+                waitForJS: true,
+                waitForJSVarName: 'ready'
             }, function(err, res) {
                 if (err) {
                     return done(err);
