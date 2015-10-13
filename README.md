@@ -45,6 +45,8 @@ conversion({
 	footer: "<h2>foo</h2>",
 	url: "http://jsreport.net",//set direct url instead of html
 	printDelay: 0,//time in ms to wait before printing into pdf
+	waitForJS: true,//set to true to enable programmatically specify (via Javascript of the page) when the pdf printing starts (see Programmatic pdf printing section for an example)
+	waitForJSVarName: //name of the variable that will be used as a printing trigger, defaults to "PHANTOM_HTML_TO_PDF_READY" (see Programmatic pdf printing section for an example)
 	allowLocalFilesAccess: false,//set to true to allow request starting with file:///
 	paperSize: {
 		format, orientation, margin, width, height, headerHeight, footerHeight
@@ -71,6 +73,38 @@ conversion.kill();
 
 ##Page numbers
 Use directives `{#pageNum}` and `{#numPages}` inside header or footer to add current page number resp. total number of pages.
+
+##Programmatic pdf printing
+If you need to programmatic trigger the pdf printing process (because you need to calculate some values or do something async in your page before printing) you can enable the `waitForJS` local option, when `waitForJS` is set to true the pdf printing will wait until you set a variable to true in your page, by default the name of the variable is `PHANTOM_HTML_TO_PDF_READY` but you can customize it via `waitForJSVarName` option.
+
+**Example:**
+
+local options:
+```js
+conversion({
+	html: "<custom html here>",
+	waitForJS: true,
+	viewportSize: {
+		width: 600,
+		height: 600
+	},
+	format: {
+		quality: 100
+	}
+}, cb);
+```
+
+custom html:
+```html
+<h1></h1>
+<script>
+	// do some calculations or something async
+	setTimeout(function() {
+		window.PHANTOM_HTML_TO_PDF_READY = true; //this will start the pdf printing
+	}, 500);
+</script>
+```
+
 
 ##Further notes
 You may find some further information and usage examples in the [jsreport documentation](http://jsreport.net/learn/phantom-pdf) or try pdf printing in the [online playground](https://playground.jsreport.net/#/playground/xykdJcxR5).
