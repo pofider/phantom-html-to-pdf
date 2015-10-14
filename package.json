@@ -29,7 +29,7 @@
     "should": "5.0.1"
   },
   "scripts": {
-    "test": "node lib/prepareScripts.js && mocha test/test.js",
+    "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 4000",
     "postinstall": "node lib/prepareScripts.js"
   },
   "main": "index.js",
