@@ -107,6 +107,29 @@ describe("phantom html to pdf", function () {
                 done();
             });
         });
+
+        it('should throw timeout when waiting for page js execution', function(done) {
+            //since phantom-worker doesn't support a timeout per request
+            //we increase the test timeout
+            this.timeout(20000);
+
+            conversion({
+                html: '<h1>aa</h1>',
+                timeout: 500,
+                waitForJS: true
+            }, function(err, res) {
+                if (!err) {
+                    return done(new Error('the conversion doesn\'t throw error'));
+                }
+
+                if (err.phantomTimeout !== undefined) {
+                    should(err.phantomTimeout).be.eql(true);
+                    done();
+                } else {
+                    done(err);
+                }
+            });
+        });
     }
 
     rmDir = function (dirPath) {
