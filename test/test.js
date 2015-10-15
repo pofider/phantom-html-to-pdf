@@ -48,7 +48,7 @@ describe("phantom html to pdf", function () {
             });
         });
 
-        it ('should create a pdf file ignoring ssl errors', function(done) {
+        it('should create a pdf file ignoring ssl errors', function(done) {
             conversion({
                 url: 'https://sygris.com'
             }, function(err, res) {
@@ -59,6 +59,75 @@ describe("phantom html to pdf", function () {
                 res.numberOfPages.should.be.eql(1);
                 res.stream.should.have.property("readable");
                 done();
+            });
+        });
+
+        it('should wait for page js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>window.PHANTOM_HTML_TO_PDF_READY = true;</script>',
+                waitForJS: true
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should wait for page async js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>setTimeout(function() { window.PHANTOM_HTML_TO_PDF_READY = true; }, 200);</script>',
+                waitForJS: true
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should allow define a custom var name for page js execution', function(done) {
+            conversion({
+                html: '<h1>aa</h1><script>window.ready = true;</script>',
+                waitForJS: true,
+                waitForJSVarName: 'ready'
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                res.numberOfPages.should.be.eql(1);
+                res.stream.should.have.property("readable");
+                done();
+            });
+        });
+
+        it('should throw timeout when waiting for page js execution', function(done) {
+            //since phantom-worker doesn't support a timeout per request
+            //we increase the test timeout
+            this.timeout(20000);
+
+            conversion({
+                html: '<h1>aa</h1>',
+                timeout: 500,
+                waitForJS: true
+            }, function(err, res) {
+                if (!err) {
+                    return done(new Error('the conversion doesn\'t throw error'));
+                }
+
+                if (err.phantomTimeout !== undefined) {
+                    should(err.phantomTimeout).be.eql(true);
+                    done();
+                } else {
+                    done(err);
+                }
             });
         });
     }
