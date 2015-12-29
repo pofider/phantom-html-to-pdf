@@ -25,7 +25,7 @@
   },
   "optionalDependencies": {
     "phantomjs": "1.9.17"
-  }
+  },
   "devDependencies": {
     "mocha": "2.1.0",
     "should": "5.0.1"
