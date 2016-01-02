@@ -19,7 +19,7 @@
     "url": "git@github.com:pofider/phantom-html-to-pdf.git"
   },
   "dependencies": {
-    "phantom-workers": "0.3.1",
+    "phantom-workers": "0.3.2",
     "underscore": "1.8.2",
     "uuid": "2.0.1"
   },
