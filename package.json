@@ -20,9 +20,11 @@
   },
   "dependencies": {
     "phantom-workers": "0.3.1",
-    "phantomjs": "1.9.17",
     "underscore": "1.8.2",
     "uuid": "2.0.1"
+  },
+  "optionalDependencies": {
+    "phantomjs": "1.9.17"
   },
   "devDependencies": {
     "mocha": "2.1.0",

@@ -18,7 +18,7 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 ##Global options
 ```js
 var conversion = require("phantom-html-to-pdf")({
-    /* number of allocated phantomjs processes */
+	/* number of allocated phantomjs processes */
 	numberOfWorkers: 2,
 	/* timeout in ms for html conversion, when the timeout is reached, the phantom process is recycled */
 	timeout: 5000,
@@ -29,12 +29,17 @@ var conversion = require("phantom-html-to-pdf")({
 	portRightBoundary: 2000,
 	/* optional hostname where to start phantomjs server */
 	host: '127.0.0.1',
-	/* use rather dedicated process for every phantom printing 
-	  dedicated-process strategy is quite slower but can solve some bugs 
-	  with corporate proxy */	
-	strategy: "phantom-server | dedicated-process"
+	/* use rather dedicated process for every phantom printing
+	  dedicated-process strategy is quite slower but can solve some bugs
+	  with corporate proxy */
+	strategy: "phantom-server | dedicated-process",
+	/* optional path to the phantomjs binary
+	   NOTE: When using phantomjs 2.0, be aware of https://github.com/ariya/phantomjs/issues/12685 */
+	phantomPath: "{path to phantomjs}"
 });
 ```
+
+
 
 ##Local options
 
