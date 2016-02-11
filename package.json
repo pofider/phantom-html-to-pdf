@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "lodash": "4.2.1",
-    "phantom-workers": "0.3.2",
+    "phantom-workers": "0.3.3",
     "uuid": "2.0.1"
   },
   "optionalDependencies": {
@@ -32,7 +32,7 @@
     "should": "5.0.1"
   },
   "scripts": {
-    "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 4000",
+    "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 8000",
     "postinstall": "node lib/prepareScripts.js"
   },
   "main": "index.js",

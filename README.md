@@ -36,7 +36,9 @@ var conversion = require("phantom-html-to-pdf")({
 	strategy: "phantom-server | dedicated-process",
 	/* optional path to the phantomjs binary
 	   NOTE: When using phantomjs 2.0, be aware of https://github.com/ariya/phantomjs/issues/12685 */
-	phantomPath: "{path to phantomjs}"
+	phantomPath: "{path to phantomjs}",
+	/* see phantomjs arguments for proxy setting details */
+	proxy,proxy-type,proxy-auth
 });
 ```
 
