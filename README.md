@@ -71,6 +71,17 @@ conversion({
 }, cb);
 ```
 
+##phantomjs2
+This package includes phantomjs 1.9.x distribution. If you like to rather use latest phantomjs you can provide it in the  `phantomPath` option.
+
+Install [phantomjs-prebuilt](https://www.npmjs.com/package/phantomjs-prebuilt) and then...
+```js
+ conversion({ 
+   html: "foo", 
+   phantomPath: require("phantomjs-prebuilt").path
+ }, function (err, res){})
+```
+
 ##Kill workers
 ```js
 //kill all phantomjs workers when using phantom-server strategy
