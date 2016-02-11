@@ -151,6 +151,19 @@ describe("phantom html to pdf", function () {
                 }
             });
         });
+
+        it('should return output with logged phantomjs messages', function(done) {
+            conversion({
+                html: '<script>var a = foo</script>'
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                JSON.stringify(res.logs).should.containEql('foo');
+                done();
+            });
+        });
     }
 
     rmDir = function (dirPath) {

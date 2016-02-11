@@ -10,6 +10,7 @@ Yet another implementation of html to pdf conversion in node.js using phantomjs.
 ```js
 var conversion = require("phantom-html-to-pdf")();
 conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
+  console.log(pdf.logs);
   console.log(pdf.numberOfPages);
   pdf.stream.pipe(res);
 });
