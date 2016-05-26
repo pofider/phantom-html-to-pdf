@@ -19,17 +19,17 @@
     "url": "git@github.com:pofider/phantom-html-to-pdf.git"
   },
   "dependencies": {
-    "lodash": "4.2.1",
-    "phantom-workers": "0.3.3",
-    "uuid": "2.0.1"
+    "lodash": "4.13.1",
+    "phantom-workers": "0.4.0",
+    "uuid": "2.0.2"
   },
   "optionalDependencies": {
     "phantomjs": "1.9.17"
   },
   "devDependencies": {
-    "mocha": "2.1.0",
-    "phantomjs-prebuilt": "^2.1.3",
-    "should": "5.0.1"
+    "mocha": "2.5.3",
+    "phantomjs-prebuilt": "2.1.3",
+    "should": "8.4.0"
   },
   "scripts": {
     "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 8000",

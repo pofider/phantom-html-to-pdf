@@ -21,6 +21,34 @@ describe("phantom html to pdf", function () {
         common("dedicated-process");
     });
 
+    describe("extra options", function () {
+        it('should be able to configure maxLogEntrySize in dedicated-process', testMaxLogEntrySize('dedicated-process'));
+        it('should be able to configure maxLogEntrySize in phantom-server', testMaxLogEntrySize('phantom-server'));
+
+        function testMaxLogEntrySize(strategy) {
+            return function(done) {
+                conversion.kill();
+                var cvn = require("../lib/conversion.js")({
+                    timeout: 10000,
+                    tmpDir: tmpDir,
+                    strategy: strategy,
+                    maxLogEntrySize: 2
+                });
+
+                cvn({
+                    html: '<script>console.log("123")</script>'
+                }, function(err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    JSON.stringify(res.logs).should.containEql('12...');
+                    done();
+                });
+            }
+        }
+    })
+
     function common(strategy) {
 
         beforeEach(function() {
@@ -161,6 +189,37 @@ describe("phantom html to pdf", function () {
                 }
 
                 JSON.stringify(res.logs).should.containEql('foo');
+                done();
+            });
+        });
+
+        it('should return output with logged console messages', function(done) {
+            conversion({
+                html: '<script>console.log("foo")</script>'
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                JSON.stringify(res.logs).should.containEql('foo');
+                done();
+            });
+        });
+
+        it('should trim logs for long base64 encoded images', function(done) {
+            var img = "start"
+            for (var i = 0; i < 40000; i++) {
+                img += 'fooooooooo';
+            }
+
+            conversion({
+                html: '<img src="data:image/png;base64,' + img + '" />'
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+
+                JSON.stringify(res.logs).should.containEql('start');
                 done();
             });
         });
