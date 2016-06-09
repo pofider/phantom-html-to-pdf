@@ -63,7 +63,8 @@ conversion({
 	},
 	customHeaders: [],
 	settings: {
-		javascriptEnabled : true
+		javascriptEnabled : true,
+		resourceTimeout: 1000
 	},
 	viewportSize: {
 		width: 600,
