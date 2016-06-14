@@ -127,6 +127,8 @@ custom html:
 </script>
 ```
 
+##Image in header
+To be able to display an image in the header or footer you need to add the same image to the main content and hide it with `style="display:none"`.
 
 ##Further notes
 You may find some further information and usage examples in the [jsreport documentation](http://jsreport.net/learn/phantom-pdf) or try pdf printing in the [online playground](https://playground.jsreport.net/#/playground/xykdJcxR5).
