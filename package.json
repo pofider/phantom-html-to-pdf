@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "mocha": "2.5.3",
-    "phantomjs-prebuilt": "2.1.3",
-    "should": "8.4.0"
+    "phantomjs-prebuilt": "2.1.7",
+    "should": "9.0.2"
   },
   "scripts": {
     "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 8000",
