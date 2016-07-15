@@ -19,6 +19,7 @@
     "url": "git@github.com:pofider/phantom-html-to-pdf.git"
   },
   "dependencies": {
+    "in-publish": "2.0.0",
     "lodash": "4.13.1",
     "phantom-workers": "0.4.0",
     "uuid": "2.0.2"
@@ -33,7 +34,7 @@
   },
   "scripts": {
     "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 8000",
-    "postinstall": "node lib/prepareScripts.js"
+    "prepublish": "in-publish && node lib/prepareScripts.js || not-in-publish"
   },
   "main": "index.js",
   "license": "MIT"
