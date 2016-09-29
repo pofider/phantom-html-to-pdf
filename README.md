@@ -61,6 +61,7 @@ conversion({
 	paperSize: {
 		format, orientation, margin, width, height, headerHeight, footerHeight
 	},
+  fitToPage: false, //whether to set zoom if contents don't fit on the page
 	customHeaders: [],
 	settings: {
 		javascriptEnabled : true,
