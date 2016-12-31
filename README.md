@@ -63,6 +63,7 @@ conversion({
 	},
   fitToPage: false, //whether to set zoom if contents don't fit on the page
 	customHeaders: [],
+	injectJs: [], // injects javascript files in the page
 	settings: {
 		javascriptEnabled : true,
 		resourceTimeout: 1000
