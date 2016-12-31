@@ -223,6 +223,21 @@ describe("phantom html to pdf", function () {
                 done();
             });
         });
+
+        it('should allow to inject js files to the page', function(done) {
+            conversion({
+                html: 'foo',
+                injectJs: [
+                    path.join(__dirname, 'injectjs.js')
+                ]
+            }, function(err, res) {
+                if (err)
+                    return done(err);
+
+                JSON.stringify(res.logs).should.containEql('INJECTJS TEST');
+                done();
+            })
+        });
     }
 
     rmDir = function (dirPath) {
