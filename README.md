@@ -16,6 +16,15 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 });
 ```
 
+##Linux installation
+You may need to install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package to make the conversion working properly on linux
+
+**Centos**    
+`sudo yum install -y fontconfig`
+
+**Debian/Ubuntu**    
+`sudo apt-get install -y libfontconfig`
+
 ##Global options
 ```js
 var conversion = require("phantom-html-to-pdf")({
