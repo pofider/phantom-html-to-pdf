@@ -16,13 +16,16 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 });
 ```
 
-##Linux installation
-You may need to install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package to make the conversion working properly on linux
+##Installation troubleshooting
 
-**Centos**    
-`sudo yum install -y fontconfig`
+- **windows** works out of the box.
 
-**Debian/Ubuntu**    
+- **macOS sierra update** works only with phantomjs2, see below
+
+- **linux** may need to additionally install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package    
+*Centos*    
+`sudo yum install -y fontconfig`    
+*Debian/Ubuntu*    
 `sudo apt-get install -y libfontconfig`
 
 ##Global options
