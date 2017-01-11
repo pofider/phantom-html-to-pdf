@@ -73,7 +73,8 @@ conversion({
 	paperSize: {
 		format, orientation, margin, width, height, headerHeight, footerHeight
 	},
-  fitToPage: false, //whether to set zoom if contents don't fit on the page
+    fitToPage: false, //whether to set zoom if contents don't fit on the page
+    cleanTmpFile: true, //whether to delete tmp files used during the conversion
 	customHeaders: [],
 	injectJs: [], // injects javascript files in the page
 	settings: {
