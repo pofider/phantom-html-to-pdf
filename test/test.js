@@ -77,6 +77,25 @@ describe("phantom html to pdf", function () {
             });
         });
 
+        it("should remove temp pdf file when consumed", function (done) {
+            conversion("foo", function (err, res) {
+                if (err)
+                    return done(err);
+
+                res.numberOfPages.should.be.eql(1);
+
+                // switching the stream to flowing mode, to consume its content
+                res.stream.on('data', function() {});
+
+                setTimeout(function() {
+                    // temp pdf file should be removed after being consumed
+                    should(fs.existsSync(res.stream.path)).be.eql(false);
+
+                    done();
+                }, 300);
+            });
+        });
+
         it("should work with multiple phantom paths", function (done) {
             conversion({ html: "foo", phantomPath: phantomjs.path}, function (err, res) {
                 if (err)
