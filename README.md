@@ -16,6 +16,18 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 });
 ```
 
+##Installation troubleshooting
+
+- **windows** works out of the box.
+
+- **macOS sierra update** works only with phantomjs2, see below
+
+- **linux** may need to additionally install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package    
+*Centos*    
+`sudo yum install -y fontconfig`    
+*Debian/Ubuntu*    
+`sudo apt-get install -y libfontconfig`
+
 ##Global options
 ```js
 var conversion = require("phantom-html-to-pdf")({
