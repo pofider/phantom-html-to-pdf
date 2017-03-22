@@ -241,7 +241,7 @@ describe("phantom html to pdf", function () {
 
         it('should include user defined cookies in http requests', function(done) {
             conversion({
-                html: 'foo',
+                html: '<script>console.log(document.cookie);</script>',
                 cookies: [
                     { 
                         name: 'test-cookie1', 
@@ -259,7 +259,6 @@ describe("phantom html to pdf", function () {
             }, function(err, res) {
                 if (err)
                     return done(err);
-                
                 JSON.stringify(res.logs).should.containEql('test-cookie1=test-value1; test-cookie2=test-value2');
                 done();
             })
