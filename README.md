@@ -1,4 +1,4 @@
-#phantom-html-to-pdf
+# phantom-html-to-pdf
 [![NPM Version](http://img.shields.io/npm/v/phantom-html-to-pdf.svg?style=flat-square)](https://npmjs.com/package/phantom-html-to-pdf)
 [![License](http://img.shields.io/npm/l/phantom-html-to-pdf.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/pofider/phantom-html-to-pdf.png?branch=master)](https://travis-ci.org/pofider/phantom-html-to-pdf)
@@ -16,7 +16,7 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 });
 ```
 
-##Installation troubleshooting
+## Installation troubleshooting
 
 - **windows** works out of the box.
 
@@ -28,7 +28,7 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 *Debian/Ubuntu*    
 `sudo apt-get install -y libfontconfig`
 
-##Global options
+## Global options
 ```js
 var conversion = require("phantom-html-to-pdf")({
 	/* number of allocated phantomjs processes */
@@ -58,7 +58,7 @@ var conversion = require("phantom-html-to-pdf")({
 
 
 
-##Local options
+## Local options
 
 ```js
 conversion({
@@ -75,6 +75,14 @@ conversion({
 	},
   fitToPage: false, //whether to set zoom if contents don't fit on the page
 	customHeaders: [],
+    cookies: [
+        {
+            name: 'cookie-name',
+            value: 'cookie-value',
+            path: '/',
+            domain: 'domain.com'//Leave blank when working on localhost - "." will get prepended to domain
+        }
+    ]
 	injectJs: [], // injects javascript files in the page
 	settings: {
 		javascriptEnabled : true,
@@ -90,7 +98,7 @@ conversion({
 }, cb);
 ```
 
-##phantomjs2
+## phantomjs2
 This package includes phantomjs 1.9.x distribution. If you like to rather use latest phantomjs you can provide it in the  `phantomPath` option.
 
 Install [phantomjs-prebuilt](https://www.npmjs.com/package/phantomjs-prebuilt) and then...
@@ -101,16 +109,16 @@ Install [phantomjs-prebuilt](https://www.npmjs.com/package/phantomjs-prebuilt) a
  }, function (err, res){})
 ```
 
-##Kill workers
+## Kill workers
 ```js
 //kill all phantomjs workers when using phantom-server strategy
 conversion.kill();
 ```
 
-##Page numbers
+## Page numbers
 Use directives `{#pageNum}` and `{#numPages}` inside header or footer to add current page number resp. total number of pages.
 
-##Programmatic pdf printing
+## Programmatic pdf printing
 If you need to programmatic trigger the pdf printing process (because you need to calculate some values or do something async in your page before printing) you can enable the `waitForJS` local option, when `waitForJS` is set to true the pdf printing will wait until you set a variable to true in your page, by default the name of the variable is `PHANTOM_HTML_TO_PDF_READY` but you can customize it via `waitForJSVarName` option.
 
 **Example:**
@@ -141,12 +149,12 @@ custom html:
 </script>
 ```
 
-##Image in header
+## Image in header
 To be able to display an image in the header or footer you need to add the same image to the main content and hide it with `style="display:none"`.
 
-##Further notes
+## Further notes
 You may find some further information and usage examples in the [jsreport documentation](http://jsreport.net/learn/phantom-pdf) or try pdf printing in the [online playground](https://playground.jsreport.net/#/playground/xykdJcxR5).
 
 
-##License
+## License
 See [license](https://github.com/pofider/phantom-html-to-pdf/blob/master/LICENSE)
