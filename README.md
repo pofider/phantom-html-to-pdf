@@ -75,14 +75,12 @@ conversion({
 	},
   	fitToPage: false, //whether to set zoom if contents don't fit on the page
 	customHeaders: [],
-    cookies: [
-        {
-            name: 'cookie-name',
-            value: 'cookie-value',
-            path: '/',
-            domain: 'domain.com'//Leave blank when working on localhost - "." will get prepended to domain
-        }
-    ],
+        cookies: [{
+                name: 'cookie-name',
+                value: 'cookie-value',
+                path: '/',
+                domain: 'domain.com'//Leave blank when working on localhost - "." will get prepended to domain
+        }],
 	injectJs: [], // injects javascript files in the page
 	settings: {
 		javascriptEnabled : true,
