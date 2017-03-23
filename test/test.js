@@ -246,14 +246,12 @@ describe("phantom html to pdf", function () {
                     { 
                         name: 'test-cookie1', 
                         value: 'test-value1', 
-                        path: '/',
-                        //domain: '', don't use this when running on localhost, domains get prefixed with a "."
+                        path: '/',                        
                     },
                     { 
                         name: 'test-cookie2', 
                         value: 'test-value2', 
-                        path: '/',
-                        //domain: '', don't use this when running on localhost, domains get prefixed with a "."
+                        path: '/',                        
                     }
                 ]
             }, function(err, res) {
