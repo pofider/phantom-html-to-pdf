@@ -238,6 +238,31 @@ describe("phantom html to pdf", function () {
                 done();
             })
         });
+
+        it('should include user defined cookies in http requests', function(done) {
+            conversion({
+                html: '<script>console.log(document.cookie);</script>',
+                cookies: [
+                    { 
+                        name: 'test-cookie1', 
+                        value: 'test-value1', 
+                        path: '/',
+                        //domain: '', don't use this when running on localhost, domains get prefixed with a "."
+                    },
+                    { 
+                        name: 'test-cookie2', 
+                        value: 'test-value2', 
+                        path: '/',
+                        //domain: '', don't use this when running on localhost, domains get prefixed with a "."
+                    }
+                ]
+            }, function(err, res) {
+                if (err)
+                    return done(err);
+                JSON.stringify(res.logs).should.containEql('test-cookie1=test-value1; test-cookie2=test-value2');
+                done();
+            })
+        });
     }
 
     rmDir = function (dirPath) {
