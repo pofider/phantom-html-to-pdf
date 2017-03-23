@@ -102,12 +102,12 @@ This package includes phantomjs 1.9.x distribution. If you like to rather use la
 Install [phantomjs-prebuilt](https://www.npmjs.com/package/phantomjs-prebuilt) and then...
 ```js
 var conversion = require("phantom-html-to-pdf")({
-	phantomPath: require("phantomjs-prebuilt").path;
-})
+	phantomPath: require("phantomjs-prebuilt").path
+});
 
 conversion({ 
 	html: "foo",   
-}, function (err, res){})
+}, function (err, res){});
 ```
 
 ## Kill workers
