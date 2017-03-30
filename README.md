@@ -62,9 +62,9 @@ var conversion = require("phantom-html-to-pdf")({
 
 ```js
 conversion({
-	html: "<h1>Hello world</h1>",
-	header: "<h2>foo</h2>",
-	footer: "<h2>foo</h2>",
+	html: '<h1>Hello world</h1>',
+	header: '<h2>This is the header</h2>',
+	footer: '<div style="text-align:center">{#pageNum}/{#numPages}</div>',
 	url: "http://jsreport.net",//set direct url instead of html
 	printDelay: 0,//time in ms to wait before printing into pdf
 	waitForJS: true,//set to true to enable programmatically specify (via Javascript of the page) when the pdf printing starts (see Programmatic pdf printing section for an example)
