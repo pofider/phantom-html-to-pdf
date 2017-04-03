@@ -116,8 +116,34 @@ conversion({
 conversion.kill();
 ```
 
-## Page numbers
-Use directives `{#pageNum}` and `{#numPages}` inside header or footer to add current page number resp. total number of pages.
+## Header and footer
+
+It is possible to specify a custom header and a custom footer using HTML.
+
+In the header and footer there is no access to the rest of the document and thus
+styling with classes and leveraging external CSS does not work. Only inline
+styles works. This is a limitation on the current PhantomJS implementation.
+
+To print page numbers, use the directives `{#pageNum}` and `{#numPages}`,
+respectively to add current page number and total number of pages. For example:
+
+```html
+<div style='text-align:center'>{#pageNum}/{#numPages}</div>
+```
+
+It's also possible to use JavaScript. But note that the JavaScript code has no
+access to the rest of the HTML document either. Here is an example to modify the
+paging start:
+
+```html
+<span id='pageNumber'>{#pageNum}</span>
+<script>
+    var elem = document.getElementById('pageNumber');
+    if (parseInt(elem.innerHTML) <= 3) {
+        elem.style.display = 'none';
+    }
+</script>
+```
 
 ## Programmatic pdf printing
 If you need to programmatic trigger the pdf printing process (because you need to calculate some values or do something async in your page before printing) you can enable the `waitForJS` local option, when `waitForJS` is set to true the pdf printing will wait until you set a variable to true in your page, by default the name of the variable is `PHANTOM_HTML_TO_PDF_READY` but you can customize it via `waitForJSVarName` option.
