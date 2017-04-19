@@ -70,6 +70,7 @@ conversion({
 	waitForJS: true,//set to true to enable programmatically specify (via Javascript of the page) when the pdf printing starts (see Programmatic pdf printing section for an example)
 	waitForJSVarName: //name of the variable that will be used as a printing trigger, defaults to "PHANTOM_HTML_TO_PDF_READY" (see Programmatic pdf printing section for an example)
 	allowLocalFilesAccess: false,//set to true to allow request starting with file:///
+	// see PhantomJS options for paperSize - http://phantomjs.org/api/webpage/property/paper-size.html
 	paperSize: {
 		format, orientation, margin, width, height, headerHeight, footerHeight
 	},
@@ -86,6 +87,7 @@ conversion({
 		javascriptEnabled : true,
 		resourceTimeout: 1000
 	},
+	// see phantomjs docs - http://phantomjs.org/api/webpage/property/viewport-size.html
 	viewportSize: {
 		width: 600,
 		height: 600
