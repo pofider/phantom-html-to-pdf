@@ -8,11 +8,16 @@
 Yet another implementation of html to pdf conversion in node.js using phantomjs. This one differs from others in performance and scalability. Unlike others it allocates predefined number of phantomjs worker processes which are then managed and reused using FIFO strategy. This eliminates phantomjs process startup time and it also doesn't flood the system with dozens of phantomjs process under load.
 
 ```js
+var fs = require('fs')
 var conversion = require("phantom-html-to-pdf")();
 conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
+  var output = fs.createWriteStream('/path/to/output.pdf')
   console.log(pdf.logs);
   console.log(pdf.numberOfPages);
-  pdf.stream.pipe(res);
+	// since pdf.stream is a node.js stream you can use it
+	// to save the pdf to a file (like in this example) or to
+	// respond an http request.
+  pdf.stream.pipe(output);
 });
 ```
 
@@ -107,7 +112,7 @@ var conversion = require("phantom-html-to-pdf")({
 	phantomPath: require("phantomjs-prebuilt").path
 });
 
-conversion({ 
+conversion({
 	html: "foo",   
 }, function (err, res){});
 ```
