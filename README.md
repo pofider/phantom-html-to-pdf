@@ -189,6 +189,9 @@ To be able to display an image in the header or footer you need to add the same 
 ## Further notes
 You may find some further information and usage examples in the [jsreport documentation](http://jsreport.net/learn/phantom-pdf) or try pdf printing in the [online playground](https://playground.jsreport.net/#/playground/xykdJcxR5).
 
+## Warming up
+The phantomjs instances are sinned up when the requests comes. This usually leads to a bit slower first requests. The pre-warmup can be easily done by calling an "empty" conversion the same number of times as the `numberOfWorkers` config.
 
 ## License
 See [license](https://github.com/pofider/phantom-html-to-pdf/blob/master/LICENSE)
+**strong text**
