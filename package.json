@@ -34,7 +34,7 @@
     "should": "9.0.2"
   },
   "scripts": {
-    "test": "node lib/prepareScripts.js && mocha test/test.js --timeout 15000",
+    "test": "node lib/prepareScripts.js && mocha --check-leaks test/test.js --timeout 15000",
     "prepublish": "in-publish && node lib/prepareScripts.js || not-in-publish"
   },
   "main": "index.js",
