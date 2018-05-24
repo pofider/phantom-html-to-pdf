@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "mocha": "2.5.3",
-    "phantomjs-prebuilt": "2.1.7",
+    "phantomjs-prebuilt": "2.1.16",
     "should": "9.0.2"
   },
   "scripts": {
