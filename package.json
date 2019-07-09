@@ -19,16 +19,16 @@
     "url": "git@github.com:pofider/phantom-html-to-pdf.git"
   },
   "dependencies": {
-    "in-publish": "2.0.0",
-    "lodash": "4.13.1",
+    "lodash": "4.17.11",
     "object-assign": "4.1.1",
-    "phantom-workers": "0.4.2",
-    "uuid": "2.0.2"
+    "phantom-workers": "github:pofider/phantom-workers",
+    "uuid": "3.3.2"
   },
   "optionalDependencies": {
-    "phantomjs": "1.9.17"
+    "phantomjs": "1.9.20"
   },
   "devDependencies": {
+    "in-publish": "2.0.0",
     "mocha": "2.5.3",
     "phantomjs-prebuilt": "2.1.16",
     "should": "9.0.2"
