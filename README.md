@@ -4,7 +4,7 @@
 [![License](http://img.shields.io/npm/l/phantom-html-to-pdf.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/pofider/phantom-html-to-pdf.png?branch=master)](https://travis-ci.org/pofider/phantom-html-to-pdf)
 
-**The phantomjs development is on hold and as is this project. I am still trying to accept PRs but that is all for now. I recommend to evaluate other methods for html to pdf conversion. We have switched from phantomjs to headless chrome in [jsreport](https://jsreport.net) and it works great.**
+**The phantomjs development is on hold and as is this project. I recommend to evaluate other methods for html to pdf conversion. We have switched from phantomjs to headless chrome in [jsreport](https://jsreport.net) and it works great.**
 
 > **node.js phantom wrapper for converting html to pdf in scale**
 
