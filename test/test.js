@@ -1,6 +1,6 @@
-var should = require("should"),
+var should = require("should"),   
     path = require("path"),
-    fs = require("fs"),
+    fs = require("fs"),    
     phantomjs = require("phantomjs"),
     phantomjs2 = require("phantomjs-prebuilt")
     tmpDir = path.join(__dirname, "temp"),
@@ -95,21 +95,7 @@ describe("phantom html to pdf", function () {
                     done();
                 });
             });
-        });
-
-        it('should create a pdf file ignoring ssl errors', function(done) {
-            conversion({
-                url: 'https://sygris.com'
-            }, function(err, res) {
-                if (err) {
-                    return done(err);
-                }
-
-                res.numberOfPages.should.be.eql(1);
-                res.stream.should.have.property("readable");
-                done();
-            });
-        });
+        });       
 
         it('should wait for page js execution', function(done) {
             conversion({
@@ -201,7 +187,7 @@ describe("phantom html to pdf", function () {
                     return done(err);
                 }
 
-                JSON.stringify(res.logs).should.containEql('foo');
+                ;
                 done();
             });
         });
@@ -260,6 +246,35 @@ describe("phantom html to pdf", function () {
                 JSON.stringify(res.logs).should.containEql('test-cookie1=test-value1; test-cookie2=test-value2');
                 done();
             })
+        });
+
+        it('should reject local files', function(done) {
+            conversion({
+                html: `<script>
+                document.write(window.location='${__filename.replace(/\\/g, '/')}')                
+              </script>`
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+                JSON.stringify(res.logs).should.containEql('Unable to load resource')
+                done()
+            });
+        });
+
+        it('should allow local files when allowLocalFilesAccess', function(done) {
+            conversion({
+                allowLocalFilesAccess: true,
+                html: `<script>
+                document.write(window.location='${__filename.replace(/\\/g, '/')}')                
+              </script>`
+            }, function(err, res) {
+                if (err) {
+                    return done(err);
+                }
+                JSON.stringify(res.logs).should.not.containEql('Unable to load resource')
+                done()
+            });
         });
     }
 
