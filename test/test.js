@@ -250,9 +250,7 @@ describe("phantom html to pdf", function () {
 
         it('should reject local files', function(done) {
             conversion({
-                html: `<script>
-                document.write(window.location='${__filename.replace(/\\/g, '/')}')                
-              </script>`
+                html: '<script>document.write(window.location="' + __filename.replace(/\\/g, '/') + '")</script>',
             }, function(err, res) {
                 if (err) {
                     return done(err);
@@ -265,9 +263,7 @@ describe("phantom html to pdf", function () {
         it('should allow local files when allowLocalFilesAccess', function(done) {
             conversion({
                 allowLocalFilesAccess: true,
-                html: `<script>
-                document.write(window.location='${__filename.replace(/\\/g, '/')}')                
-              </script>`
+                html: '<script>document.write(window.location="' + __filename.replace(/\\/g, '/') + '")</script>',
             }, function(err, res) {
                 if (err) {
                     return done(err);
