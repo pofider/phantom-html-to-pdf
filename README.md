@@ -30,10 +30,10 @@ conversion({ html: "<h1>Hello World</h1>" }, function(err, pdf) {
 
 - **macOS sierra update** works only with phantomjs2, see below
 
-- **linux** may need to additionally install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package    
-*Centos*    
-`sudo yum install -y fontconfig`    
-*Debian/Ubuntu*    
+- **linux** may need to additionally install [fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) package
+*Centos*
+`sudo yum install -y fontconfig`
+*Debian/Ubuntu*
 `sudo apt-get install -y libfontconfig`
 
 ## Global options
@@ -102,7 +102,8 @@ conversion({
 	},
 	format: {
 		quality: 100
-	}
+	},
+	zoomFactor: 1 // defaults to 1 (original size).
 }, cb);
 ```
 
@@ -116,7 +117,7 @@ var conversion = require("phantom-html-to-pdf")({
 });
 
 conversion({
-	html: "foo",   
+	html: "foo"
 }, function (err, res){});
 ```
 
