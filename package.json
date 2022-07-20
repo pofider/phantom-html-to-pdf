@@ -21,7 +21,7 @@
   "dependencies": {
     "lodash": "4.17.11",
     "object-assign": "4.1.1",
-    "phantom-workers": "0.5.0",
+    "phantom-workers": "0.6.0",
     "uuid": "3.3.2"
   },
   "optionalDependencies": {
