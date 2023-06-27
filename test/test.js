@@ -4,6 +4,7 @@ var should = require("should"),
     phantomjs = require("phantomjs"),
     phantomjs2 = require("phantomjs-prebuilt")
     tmpDir = path.join(__dirname, "temp"),
+    http = require('http'),
     conversion = require("../lib/conversion.js")({
         timeout: 10000,
         tmpDir: tmpDir,
@@ -45,6 +46,38 @@ describe("phantom html to pdf", function () {
                     JSON.stringify(res.logs).should.containEql('12...');
                     done();
                 });
+            }
+        }
+
+        it('should be able to route requests to resourceProxy in dedicated-process', testResourceProxy('dedicated-process'));
+        it('should be able to route requests to resourceProxy in phantom-server', testResourceProxy('phantom-server'));
+
+        function testResourceProxy(strategy) {
+            return function(done) {
+                conversion.kill();
+                const server = http.createServer((req, res) => {                                         
+                    res.writeHead(200);                    
+                    res.end('document.write(\'<h1>Hello from Page 1</h1><div style="page-break-before: always;"></div><h1>Hello from Page 2</h1>\')');                    
+                })
+                server.listen(2000, 'localhost', () => {
+                    var cvn = require("../lib/conversion.js")({
+                        timeout: 10000,
+                        tmpDir: tmpDir,
+                        strategy: strategy,
+                        resourceProxy: 'http://localhost:2000/?url='
+                    });
+    
+                    cvn({
+                        html: '<script src="http://myurl.js"></script>'
+                    }, function(err, res) {
+                        server.close()
+                        if (err)
+                        return done(err);    
+                        
+                        res.numberOfPages.should.be.eql(2);
+                        done();
+                    });
+                })                
             }
         }
     })
