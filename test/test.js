@@ -4,7 +4,7 @@ var should = require("should"),
     phantomjs = require("phantomjs"),
     phantomjs2 = require("phantomjs-prebuilt")
     tmpDir = path.join(__dirname, "temp"),
-    http = require('http'),
+    https = require('https'),
     conversion = require("../lib/conversion.js")({
         timeout: 10000,
         tmpDir: tmpDir,
@@ -49,35 +49,73 @@ describe("phantom html to pdf", function () {
             }
         }
 
-        it('should be able to route requests to resourceProxy in dedicated-process', testResourceProxy('dedicated-process'));
-        it('should be able to route requests to resourceProxy in phantom-server', testResourceProxy('phantom-server'));
+        it('should be able to route requests through https proxy with dedicated-process', testHttpsResourceProxy('dedicated-process', 'https://jsreport.net/img/home.jpg'));
+        it('should be able to route requests through https proxy with with phantom-server', testHttpsResourceProxy('phantom-server', 'https://jsreport.net/img/home.jpg'));
 
-        function testResourceProxy(strategy) {
+        it('should be able to route requests through https proxy and handle errors with dedicated-process', testHttpsResourceProxy('dedicated-process', 'https://wrongwrongXXX.net/img/home.jpg'));
+        it('should be able to route requests through https proxy and handle errors with phantom-server', testHttpsResourceProxy('phantom-server', 'https://wrongwrongXXX.net/img/home.jpg'));
+
+        it('should be able to route requests through https proxy with parallel call and dedicated-process', testHttpsResourceProxyParallelCall('dedicated-process'));
+        it('should be able to route requests through https proxy with parallel call and  phantom-server', testHttpsResourceProxyParallelCall('phantom-server'));
+
+        function testHttpsResourceProxy(strategy, url) {
             return function(done) {
-                conversion.kill();
-                const server = http.createServer((req, res) => {                                         
-                    res.writeHead(200);                    
-                    res.end('document.write(\'<h1>Hello from Page 1</h1><div style="page-break-before: always;"></div><h1>Hello from Page 2</h1>\')');                    
-                })
-                server.listen(2000, 'localhost', () => {
-                    var cvn = require("../lib/conversion.js")({
-                        timeout: 10000,
-                        tmpDir: tmpDir,
-                        strategy: strategy,
-                        resourceProxy: 'http://localhost:2000/?url='
-                    });
+                conversion.kill();               
+                var cvn = require("../lib/conversion.js")({
+                    timeout: 10000,
+                    tmpDir: tmpDir,
+                    strategy: strategy,
+                    proxyHttpsCallsToResources: true
+                });
     
-                    cvn({
-                        html: '<script src="http://myurl.js"></script>'
-                    }, function(err, res) {
-                        server.close()
-                        if (err)
+                cvn({
+                    html: `<img src="${url}"></img>`
+                }, function(err, res) {                   
+                    if (err) {
                         return done(err);    
-                        
-                        res.numberOfPages.should.be.eql(2);
+                    }
+                    
+                    res.numberOfPages.should.be.eql(1);
+                    done();
+                });                            
+            }
+        }
+
+        function testHttpsResourceProxyParallelCall(strategy) {
+            return function(done) {
+                conversion.kill();               
+                var cvn = require("../lib/conversion.js")({
+                    timeout: 10000,
+                    tmpDir: tmpDir,
+                    strategy: strategy,
+                    proxyHttpsCallsToResources: true
+                });
+
+                let count = 0
+
+                cvn({
+                    html: `<img src="https://jsreport.net/img/home.jpg"></img>`
+                }, function(err, res) {                   
+                    if (err) {
+                        return done(err);    
+                    }         
+                    
+                    if (++count === 2) {                 
                         done();
-                    });
-                })                
+                    }
+                });           
+    
+                cvn({
+                    html: `<img src="https://jsreport.net/img/home.jpg"></img>`
+                }, function(err, res) {                   
+                    if (err) {
+                        return done(err);    
+                    }                    
+                 
+                    if (++count === 2) {                 
+                        done();
+                    }
+                });                            
             }
         }
     })
