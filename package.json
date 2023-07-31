@@ -19,7 +19,7 @@
     "url": "git@github.com:pofider/phantom-html-to-pdf.git"
   },
   "dependencies": {
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "object-assign": "4.1.1",
     "phantom-workers": "0.6.0",
     "uuid": "3.3.2"
